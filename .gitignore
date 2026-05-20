@@ -3,3 +3,6 @@ dist/
 build/
 *.spec
 __pycache__/
+*_report*.txt
+foodciritc.txt
+testing.txt

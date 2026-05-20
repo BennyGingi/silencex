@@ -1,0 +1,94 @@
+════════════════════════════════════════════════════════════
+  SilenceX v1.0 — Scan Report
+  Target:    scanme.nmap.org
+  Modules:   Nmap Scan, Nikto Web Scan, ZAP Spider + Scan, Custom: Port Scanner, Custom: SSL Analysis, Custom: Security Headers, Custom: DNS Enum, Custom: Subdomain Enum
+  Time:      2026-05-20 20:46:45
+  Nmap:      Fast Stealth (Recommended)
+════════════════════════════════════════════════════════════
+
+[NMAP] Port & Service Scan
+  Profile: Fast Stealth (Recommended)
+  Command: nmap -sS -T4 -Pn --open --top-ports 1000 --reason -oX /tmp/silencex_nmap_1779299205.xml scanme.nmap.org
+  Running...
+
+  Starting Nmap 7.98 ( https://nmap.org ) at 2026-05-20 20:46 +0300
+  Nmap scan report for scanme.nmap.org (45.33.32.156)
+  Host is up, received user-set (0.22s latency).
+  Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+  Not shown: 996 closed tcp ports (reset)
+  PORT      STATE SERVICE    REASON
+  22/tcp    open  ssh        syn-ack ttl 48
+  80/tcp    open  http       syn-ack ttl 43
+  9929/tcp  open  nping-echo syn-ack ttl 49
+  31337/tcp open  Elite      syn-ack ttl 48
+  Nmap done: 1 IP address (1 host up) scanned in 3.04 seconds
+
+  Host: 45.33.32.156
+
+[NIKTO] Web Vulnerability Scan
+  Command: nikto -h scanme.nmap.org 
+  Running (this may take a while)...
+
+  - Nikto v2.6.0
+  ---------------------------------------------------------------------------
+  + Target IP:          45.33.32.156
+  + Target Hostname:    scanme.nmap.org
+  + Target Port:        80
+  + Platform:           Unknown
+  + Start Time:         2026-05-20 20:46:49 (GMT3)
+  ---------------------------------------------------------------------------
+  + Server: Apache/2.4.7 (Ubuntu)
+  + Multiple IPs found: 45.33.32.156, 2600:3c01::f03c:91ff:fe18:bb2f
+  + ERROR: Failed to check for updates: 403
+  + No CGI Directories found (use '-C all' to force check all possible dirs). CGI tests skipped.
+  + [999100] /index: Uncommon header(s) 'tcn' found, with contents: list.
+  + [999965] /index: Apache mod_negotiation is enabled with MultiViews, which allows attackers to easily brute force file names. The following alternatives for 'index' were found: index.html. See: http://www.wisec.it/sectou.php?id=4698ebdc59d15,https://exchange.xforce.ibmcloud.com/vulnerabilities/8275
+  + [013587] /: Suggested security header missing: content-security-policy. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+  + [013587] /: Suggested security header missing: referrer-policy. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
+  + [013587] /: Suggested security header missing: permissions-policy. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy
+  + [013587] /: Suggested security header missing: x-content-type-options. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
+  + [013587] /: Suggested security header missing: strict-transport-security. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
+  + [600050] Apache/2.4.7 appears to be outdated (current is at least 2.4.66).
+  + ERROR: *** Error limit (20) reached for host, giving up. Last error: error reading HTTP response. ***
+  + ERROR: *** Consider using mitmproxy to avoid TLS fingerprinting. ***
+  - STATUS: Completed 620 requests (~9% complete, ~36.1 minutes left): currently in plugin 'shellshock'
+  - STATUS: Running average: Not enough data.
+  + Scan terminated: 19 errors and 8 items reported on the remote host
+  + End Time:           2026-05-20 20:50:11 (GMT3) (202 seconds)
+  ---------------------------------------------------------------------------
+  + 1 host(s) tested
+
+[ZAP] Web Application Scanner
+  ZAP found but automated CLI scanning requires zap-cli
+  Install: pip install zaproxy
+
+[CUSTOM] Python Port Scanner
+  Target IP: 45.33.32.156
+  Scanning 28 ports...
+
+  ✓    22/tcp  SSH              SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.13
+  ✓    80/tcp  HTTP             HTTP/1.1 200 OK Date: Wed, 20 May 2026 17:49:03 GMT Server
+
+  Found 2 open ports in 1.5s
+
+[CUSTOM] SSL/TLS Deep Analysis
+  SSL analysis failed: [Errno 101] Network is unreachable
+
+[CUSTOM] Security Headers Audit
+  Headers check failed: HTTPSConnectionPool(host='scanme.nmap.org', port=443): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPSConnection(host='scanme.nmap.org', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
+
+[CUSTOM] DNS Enumeration
+
+  ─── A ───
+    45.33.32.156
+
+  ─── AAAA ───
+    2600:3c01::f03c:91ff:fe18:bb2f
+
+[CUSTOM] Subdomain Enumeration (crt.sh)
+  Querying certificate transparency logs...
+  Subdomain enum error: HTTPSConnectionPool(host='crt.sh', port=443): Read timed out. (read timeout=20)
+
+════════════════════════════════════════════════════════════
+  Scan complete in 229.0s — 8 modules
+════════════════════════════════════════════════════════════

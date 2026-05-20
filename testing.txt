@@ -1,0 +1,56 @@
+════════════════════════════════════════════════════════════
+  SilenceX v1.0 — Scan Report
+  Target:    testphp.vulnweb.com
+  Modules:   Nmap Scan, Nikto Web Scan, ZAP Spider + Scan, Custom: Port Scanner, Custom: SSL Analysis, Custom: Security Headers, Custom: DNS Enum, Custom: Subdomain Enum
+  Time:      2026-05-20 20:28:35
+  Nmap:      Fast Stealth (Recommended)
+════════════════════════════════════════════════════════════
+
+[NMAP] Port & Service Scan
+  Profile: Fast Stealth (Recommended)
+  Command: nmap -sS -T4 -Pn --open --top-ports 1000 --reason -oX /tmp/silencex_nmap_1779298115.xml testphp.vulnweb.com
+  Running...
+
+  Starting Nmap 7.98 ( https://nmap.org ) at 2026-05-20 20:28 +0300
+  Nmap done: 1 IP address (1 host up) scanned in 101.89 seconds
+
+[NIKTO] Web Vulnerability Scan
+  Command: nikto -h testphp.vulnweb.com 
+  Running (this may take a while)...
+
+  - Nikto v2.6.0
+  ---------------------------------------------------------------------------
+  + [FAIL] Unable to connect to testphp.vulnweb.com:80.
+
+[ZAP] Web Application Scanner
+  ZAP found but automated CLI scanning requires zap-cli
+  Install: pip install zaproxy
+
+[CUSTOM] Python Port Scanner
+  Target IP: 44.228.249.3
+  Scanning 28 ports...
+
+
+  Found 0 open ports in 3.0s
+
+[CUSTOM] SSL/TLS Deep Analysis
+  SSL analysis failed: timed out
+
+[CUSTOM] Security Headers Audit
+  Headers check failed: HTTPSConnectionPool(host='testphp.vulnweb.com', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='testphp.vulnweb.com', port=443) at 0x7fd9b309fb10>, 'Connection to testphp.vulnweb.com timed out. (connect timeout=10)'))
+
+[CUSTOM] DNS Enumeration
+
+  ─── A ───
+    44.228.249.3
+
+  ─── TXT ───
+    "google-site-verification:toEctYsulNIxgraKk7H3z58PCyz2IOCc36pIupEPmYQ"
+
+[CUSTOM] Subdomain Enumeration (crt.sh)
+  Querying certificate transparency logs...
+  Subdomain enum error: HTTPSConnectionPool(host='crt.sh', port=443): Read timed out. (read timeout=20)
+
+════════════════════════════════════════════════════════════
+  Scan complete in 187.8s — 8 modules
+════════════════════════════════════════════════════════════
